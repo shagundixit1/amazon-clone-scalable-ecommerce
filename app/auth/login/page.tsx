@@ -1,9 +1,10 @@
 "use client";
 
+import { Suspense } from "react";
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function LoginPage() {
+function LoginInner() {
   const router = useRouter();
   const params = useSearchParams();
 
@@ -83,12 +84,10 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex flex-col items-center bg-white pt-6">
 
-      {/* LOGO */}
       <h1 className="text-3xl font-bold mb-6">
         amazon<span className="text-sm align-super">.in</span>
       </h1>
 
-      {/* CARD */}
       <div className="w-[350px] border border-gray-300 p-6 rounded-md bg-white">
 
         <h2 className="text-xl font-semibold mb-4">
@@ -99,7 +98,6 @@ export default function LoginPage() {
             : "Create account"}
         </h2>
 
-        {/* EMAIL */}
         <label className="text-sm font-medium">
           Enter mobile number or email
         </label>
@@ -110,7 +108,6 @@ export default function LoginPage() {
           className="w-full border border-gray-400 rounded-sm px-2 py-2 mt-1 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
 
-        {/* NAME */}
         {isExistingUser === false && (
           <input
             placeholder="Full Name"
@@ -120,7 +117,6 @@ export default function LoginPage() {
           />
         )}
 
-        {/* PASSWORD */}
         {isExistingUser !== null && (
           <input
             type="password"
@@ -131,7 +127,6 @@ export default function LoginPage() {
           />
         )}
 
-        {/* BUTTON */}
         {isExistingUser === null ? (
           <button
             onClick={handleContinue}
@@ -148,7 +143,6 @@ export default function LoginPage() {
           </button>
         )}
 
-        {/* TERMS */}
         <p className="text-xs text-gray-600 mt-4">
           By continuing, you agree to Amazon's{" "}
           <span className="text-blue-600 hover:underline cursor-pointer">
@@ -162,7 +156,6 @@ export default function LoginPage() {
 
         <hr className="my-4" />
 
-        {/* BUSINESS */}
         <p className="text-sm font-semibold">
           Buying for work?
         </p>
@@ -172,7 +165,6 @@ export default function LoginPage() {
         </p>
       </div>
 
-      {/* FOOTER */}
       <div className="mt-10 text-xs text-gray-500 flex gap-6">
         <span className="hover:underline cursor-pointer">Conditions of Use</span>
         <span className="hover:underline cursor-pointer">Privacy Notice</span>
@@ -183,5 +175,13 @@ export default function LoginPage() {
         © 1996–2026, Amazon.com, Inc. or its affiliates
       </p>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LoginInner />
+    </Suspense>
   );
 }

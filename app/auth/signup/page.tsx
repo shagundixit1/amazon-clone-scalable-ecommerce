@@ -1,14 +1,15 @@
 "use client";
 
+import { Suspense } from "react";
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function SignupPage() {
+function SignupInner() {
   const router = useRouter();
   const params = useSearchParams();
 
   const identifier = params.get("identifier") || "";
-  const redirect = params.get("redirect"); // 🔥 NEW
+  const redirect = params.get("redirect");
 
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState(identifier);
@@ -16,7 +17,7 @@ export default function SignupPage() {
   const [loading, setLoading] = useState(false);
 
   const handleSignup = async () => {
-    if (loading) return; // 🔥 prevent multiple clicks
+    if (loading) return;
 
     setLoading(true);
 
@@ -36,14 +37,12 @@ export default function SignupPage() {
       const data = await res.json();
 
       if (res.ok) {
-        // ✅ SUCCESS → redirect properly
         if (redirect) {
-          router.push(redirect); // 🔥 go back to sell
+          router.push(redirect);
         } else {
-          router.push("/"); // 🔥 normal signup
+          router.push("/");
         }
       } else {
-        // ❌ ONLY show real backend error
         if (data?.msg) {
           alert(data.msg);
         }
@@ -60,12 +59,10 @@ export default function SignupPage() {
   return (
     <div className="min-h-screen bg-white flex flex-col items-center justify-start pt-10">
 
-      {/* LOGO */}
       <h1 className="text-3xl font-bold mb-6">
         amazon<span className="text-sm align-super">.in</span>
       </h1>
 
-      {/* CARD */}
       <div className="w-[350px] border border-gray-300 rounded-md p-6">
 
         <h2 className="text-xl font-semibold mb-4">
@@ -114,7 +111,7 @@ export default function SignupPage() {
 
         <button
           onClick={handleSignup}
-          disabled={loading} // 🔥 disable while loading
+          disabled={loading}
           className="w-full bg-yellow-400 hover:bg-yellow-500 py-2 rounded-full font-medium"
         >
           {loading ? "Please wait..." : "Verify mobile number"}
@@ -140,7 +137,6 @@ export default function SignupPage() {
         </p>
       </div>
 
-      {/* FOOTER */}
       <div className="mt-10 text-center text-xs text-gray-600">
         <div className="flex justify-center gap-4 mb-2">
           <span>Conditions of Use</span>
@@ -150,5 +146,13 @@ export default function SignupPage() {
         <p>© 1996–2026, Amazon.com, Inc. or its affiliates</p>
       </div>
     </div>
+  );
+}
+
+export default function SignupPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SignupInner />
+    </Suspense>
   );
 }
