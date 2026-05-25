@@ -25,7 +25,7 @@ export default function Navbar() {
       return;
     }
 
-    fetch("http://localhost:5000/api/auth/me", {
+    fetch("https://amazon-clone-backend-production-0d92.up.railway.app/api/auth/me", {
       headers: {
         Authorization: `Bearer ${token}`,
       },

@@ -15,7 +15,7 @@ export default function OrdersPage() {
       return;
     }
 
-    fetch("http://localhost:5000/api/orders", {
+    fetch("https://amazon-clone-backend-production-0d92.up.railway.app/api/orders", {
       headers: {
         Authorization: `Bearer ${token}`, // 🔥 FIX
       },

@@ -23,7 +23,7 @@ function LoginInner() {
   }, []);
 
   const handleContinue = async () => {
-    const res = await fetch("http://localhost:5000/api/auth/check-user", {
+    const res = await fetch("https://amazon-clone-backend-production-0d92.up.railway.app/api/auth/check-user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,7 +40,7 @@ function LoginInner() {
 
     try {
       if (!isExistingUser) {
-        const registerRes = await fetch("http://localhost:5000/api/auth/register", {
+        const registerRes = await fetch("https://amazon-clone-backend-production-0d92.up.railway.app/api/auth/register", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -56,7 +56,7 @@ function LoginInner() {
         }
       }
 
-      const loginRes = await fetch("http://localhost:5000/api/auth/login", {
+      const loginRes = await fetch("https://amazon-clone-backend-production-0d92.up.railway.app/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -33,7 +33,7 @@ export default function AddressModal({ isOpen, onClose }) {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/address", {
+      const res = await fetch("https://amazon-clone-backend-production-0d92.up.railway.app/api/address", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

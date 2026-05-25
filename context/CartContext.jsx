@@ -16,7 +16,7 @@ export function CartProvider({ children }) {
         return;
       }
 
-      const res = await fetch("http://localhost:5000/api/cart", {
+      const res = await fetch("https://amazon-clone-backend-production-0d92.up.railway.app/api/cart", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -43,7 +43,7 @@ export function CartProvider({ children }) {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch("http://localhost:5000/api/cart", {
+      const res = await fetch("https://amazon-clone-backend-production-0d92.up.railway.app/api/cart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -85,7 +85,7 @@ export function CartProvider({ children }) {
   try {
     const token = localStorage.getItem("token");
 
-    await fetch(`http://localhost:5000/api/cart/${productId}`, {
+    await fetch(`https://amazon-clone-backend-production-0d92.up.railway.app/api/cart/${productId}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -104,7 +104,7 @@ export function CartProvider({ children }) {
   try {
     const token = localStorage.getItem("token");
 
-    await fetch("http://localhost:5000/api/cart", {
+    await fetch("https://amazon-clone-backend-production-0d92.up.railway.app/api/cart", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -123,7 +123,7 @@ const decreaseQty = async (productId) => {
   try {
     const token = localStorage.getItem("token");
 
-    await fetch("http://localhost:5000/api/cart", {
+    await fetch("https://amazon-clone-backend-production-0d92.up.railway.app/api/cart", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

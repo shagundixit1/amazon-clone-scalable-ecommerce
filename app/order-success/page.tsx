@@ -37,7 +37,7 @@ function OrderSuccessContent() {
 
     const fetchOrder = async () => {
       const res = await fetch(
-        `http://localhost:5000/api/orders/${orderId}`,
+        `https://amazon-clone-backend-production-0d92.up.railway.app/api/orders/${orderId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -54,7 +54,7 @@ function OrderSuccessContent() {
 
     const fetchRecommendations = async () => {
       const res = await fetch(
-        "http://localhost:5000/api/products"
+        "https://amazon-clone-backend-production-0d92.up.railway.app/api/products"
       );
       const data = await res.json();
 
