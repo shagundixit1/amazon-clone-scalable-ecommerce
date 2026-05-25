@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 
 type OrderItem = {
   id: string;
@@ -18,7 +18,7 @@ type Order = {
   createdAt: string;
 };
 
-export default function OrderSuccessPage() {
+function OrderSuccessContent() {
   const params = useSearchParams();
   const router = useRouter();
 
@@ -35,7 +35,6 @@ export default function OrderSuccessPage() {
       return;
     }
 
-    // 🔥 FETCH ORDER DETAILS
     const fetchOrder = async () => {
       const res = await fetch(
         `http://localhost:5000/api/orders/${orderId}`,
@@ -53,7 +52,6 @@ export default function OrderSuccessPage() {
       }
     };
 
-    // 🔥 FETCH RANDOM PRODUCTS
     const fetchRecommendations = async () => {
       const res = await fetch(
         "http://localhost:5000/api/products"
@@ -61,7 +59,7 @@ export default function OrderSuccessPage() {
       const data = await res.json();
 
       if (data.success) {
-        setRecommendations(data.data.slice(0, 6)); // simple random
+        setRecommendations(data.data.slice(0, 6));
       }
     };
 
@@ -75,10 +73,7 @@ export default function OrderSuccessPage() {
 
   return (
     <div className="bg-[#eaeded] min-h-screen p-6">
-
-      {/* TOP SUCCESS CARD */}
       <div className="bg-white p-6 rounded shadow flex justify-between items-center">
-
         <div>
           <h1 className="text-green-600 font-semibold text-xl">
             Order placed, thank you!
@@ -100,14 +95,12 @@ export default function OrderSuccessPage() {
           </button>
         </div>
 
-        {/* IMAGE */}
         <img
           src={order.orderItems[0]?.product.thumbnail}
           className="w-24"
         />
       </div>
 
-      {/* ITEMS */}
       <div className="bg-white p-6 mt-6">
         <h2 className="font-semibold mb-4">
           Your Items
@@ -115,7 +108,6 @@ export default function OrderSuccessPage() {
 
         {order.orderItems.map((item) => (
           <div key={item.id} className="flex gap-4 mb-4">
-
             <img
               src={item.product.thumbnail}
               className="w-20 h-20 object-contain"
@@ -127,23 +119,18 @@ export default function OrderSuccessPage() {
                 Quantity: {item.quantity}
               </p>
             </div>
-
           </div>
         ))}
       </div>
 
-      {/* RECOMMENDATIONS */}
       <div className="mt-8">
-
         <h2 className="text-lg font-semibold mb-4">
           Recommendations Based on Your Order
         </h2>
 
         <div className="grid grid-cols-6 gap-4">
-
           {recommendations.map((product: any) => (
             <div key={product.id} className="bg-white p-3">
-
               <img
                 src={product.thumbnail}
                 className="h-32 object-contain mx-auto"
@@ -156,13 +143,18 @@ export default function OrderSuccessPage() {
               <p className="font-semibold mt-1">
                 ₹{product.price}
               </p>
-
             </div>
           ))}
-
         </div>
       </div>
-
     </div>
+  );
+}
+
+export default function OrderSuccessPage() {
+  return (
+    <Suspense fallback={<div className="p-6">Loading...</div>}>
+      <OrderSuccessContent />
+    </Suspense>
   );
 }
