@@ -1,3 +1,5 @@
+
+
 import { getProductById } from "../../../lib/api";
 import ProductClient from "../../../components/ProductClient";
 import ProductImages from "../../../components/ProductImages.jsx";
