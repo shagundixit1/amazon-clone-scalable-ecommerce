@@ -67,19 +67,7 @@ export function CartProvider({ children }) {
     }
   };
 
-  // const removeFromCart = (id) => {
-  //   setCart((prev) => prev.filter((item) => item.id !== id));
-  // };
-
-  // const increaseQty = (id) => {
-  //   setCart((prev) =>
-  //     prev.map((item) =>
-  //       item.id === id
-  //         ? { ...item, quantity: item.quantity + 1 }
-  //         : item
-  //     )
-  //   );
-  // };
+  
 
   const removeFromCart = async (productId) => {
   try {

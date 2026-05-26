@@ -2,9 +2,12 @@
 import { useEffect, useState } from "react";
 
 const images = [
-  "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da",
-  "https://images.unsplash.com/photo-1580910051074-3eb694886505",
-  "https://images.unsplash.com/photo-1598514982841-681f3d0d0a86"
+  "/banners/billboard.jpg",
+  "/banners/billboard2.jpg",
+  "/banners/billboard3.jpg",
+  "/banners/billboard4.jpg",
+  "/banners/billboard5.jpg",
+  "/banners/billboard6.jpg",
 ];
 
 export default function HeroSlider() {
@@ -19,7 +22,7 @@ export default function HeroSlider() {
   }, []);
 
   return (
-    <div className="relative w-full h-[550px] overflow-hidden">
+    <div className="relative w-full h-[800px] overflow-hidden">
 
       {/* IMAGE */}
       <img
